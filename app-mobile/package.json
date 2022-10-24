@@ -11,7 +11,11 @@
   },
   "dependencies": {
     "react": "18.1.0",
-    "react-native": "0.70.3"
+    "react-native": "0.70.3",
+    "react-native-gesture-handler": "^2.8.0",
+    "react-native-reanimated": "^2.11.0",
+    "reanimated-color-picker": "^1.0.4",
+    "rn-bluetooth": "^1.0.0-rc1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
