@@ -25,15 +25,15 @@ const customSwatches = [
 ];
 
 interface Props {
-  showModal: boolean;
-  setShowModal: (showModal: boolean) => void;
+  showColor: boolean;
+  setShowColor: (showModal: boolean) => void;
 }
 
 interface selectColor {
   hex: string;
 }
 
-export default function ColorWheel({showModal, setShowModal}: Props) {
+export default function ColorWheel({showColor, setShowColor}: Props) {
   const [color, setColor] = useState('#ffff');
 
   const {writeMessage} = useContext(AppContext) as any;
@@ -46,28 +46,61 @@ export default function ColorWheel({showModal, setShowModal}: Props) {
   };
 
   return (
-    <View>
-      <Modal visible={showModal} animationType="slide">
-        <ColorPicker
-          style={{width: '70%'}}
-          value={color}
-          onComplete={onSelectColor}>
-          <Preview hideInitialColor hideText />
-          <Panel3 />
-          <HueSlider thumbShape="triangleDown" thumbColor="#00121a" />
-          <OpacitySlider thumbShape="triangleUp" thumbColor="#00121a" />
-          <Swatches colors={customSwatches} />
+    <Modal visible={showColor} animationType="slide" statusBarTranslucent>
+      <View style={ColorWheelStyle.mainContainer}>
+        <ColorPicker value={color} onComplete={onSelectColor}>
+          <View style={ColorWheelStyle.container}>
+            <Panel3 style={ColorWheelStyle.panel} />
+            <View style={ColorWheelStyle.right}>
+              <Preview hideInitialColor hideText />
+              <HueSlider
+                thumbShape="triangleDown"
+                style={ColorWheelStyle.sliders}
+              />
+              <OpacitySlider
+                thumbShape="triangleUp"
+                style={ColorWheelStyle.sliders}
+              />
+              <Swatches colors={customSwatches} />
+              <Pressable
+                onPress={() => setShowColor(false)}
+                style={ColorWheelStyle.button}>
+                <Text style={ColorWheelStyle.text}>Close</Text>
+              </Pressable>
+            </View>
+          </View>
         </ColorPicker>
-
-        <Pressable onPress={() => setShowModal(false)} style={styles.button}>
-          <Text style={styles.text}>Close</Text>
-        </Pressable>
-      </Modal>
-    </View>
+      </View>
+    </Modal>
   );
 }
 
-const styles = StyleSheet.create({
+const ColorWheelStyle = StyleSheet.create({
+  mainContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    height: '100%',
+    padding: 10,
+    backgroundColor: '#3c1b7d',
+  },
+  container: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  panel: {
+    alignItems: 'center',
+    width: '40%',
+  },
+  right: {
+    alignItems: 'center',
+    // alignContent: 'space-around',
+    justifyContent: 'space-around',
+    // height: '100%',
+    width: '40%',
+  },
+  sliders: {
+    width: '100%',
+  },
   button: {
     alignItems: 'center',
     justifyContent: 'center',

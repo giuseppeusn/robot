@@ -1,47 +1,51 @@
-import React, {useState} from 'react';
-import {Pressable, StyleSheet, View, Text} from 'react-native';
-import Bluetooth from './components/Bluetooth';
-import ColorWheel from './components/ColorWheel';
+import React from 'react';
+import {StatusBar} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
 import AppProvider from './context/AppProvider';
+import Home from './pages/Home';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [showModal, setShowModal] = useState(false);
-
   return (
-    <View style={styles.container}>
-      <AppProvider>
-        <Pressable onPress={() => setShowModal(true)} style={styles.button}>
-          <Text style={styles.text}>Color Picker</Text>
-        </Pressable>
-        <Bluetooth />
-        <ColorWheel showModal={showModal} setShowModal={setShowModal} />
-      </AppProvider>
-    </View>
+    <AppProvider>
+      <NavigationContainer>
+        <StatusBar hidden={true} />
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}>
+          <Stack.Screen name="Home" component={Home} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AppProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#00121a',
-  },
-  button: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    backgroundColor: 'white',
-    width: '50%',
-  },
-  text: {
-    fontSize: 16,
-    lineHeight: 21,
-    fontWeight: 'bold',
-    letterSpacing: 0.25,
-    color: 'black',
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     backgroundColor: '#00121a',
+//   },
+//   button: {
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     paddingVertical: 12,
+//     paddingHorizontal: 32,
+//     borderRadius: 4,
+//     elevation: 3,
+//     backgroundColor: 'white',
+//     width: '50%',
+//   },
+//   text: {
+//     fontSize: 16,
+//     lineHeight: 21,
+//     fontWeight: 'bold',
+//     letterSpacing: 0.25,
+//     color: 'black',
+//   },
+// });

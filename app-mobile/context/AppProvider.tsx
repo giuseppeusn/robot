@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import AppContext from './AppContext';
 import {ToastAndroid} from 'react-native';
 
 const BluetoothSerial = require('rn-bluetooth');
 
 function AppProvider({children}: any) {
+  const [connected, setConnected] = useState('');
+
   const writeType = async (type: string) => {
     BluetoothSerial.write(type)
       .then((_res: Record<string, string>) => {
@@ -29,6 +31,8 @@ function AppProvider({children}: any) {
 
   const contextValue = {
     writeMessage,
+    connected,
+    setConnected,
   };
 
   return (
