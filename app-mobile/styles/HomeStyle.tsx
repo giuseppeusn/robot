@@ -39,6 +39,8 @@ export const HomeStyle = StyleSheet.create({
     backgroundColor: 'green',
   },
   bleBtn: {
+    flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
   },
   buttons: {

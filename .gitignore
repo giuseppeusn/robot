@@ -60,3 +60,8 @@ buck-out/
 *.jsbundle
 
 *.code-workspace
+
+.env
+env.d.ts
+
+assets/

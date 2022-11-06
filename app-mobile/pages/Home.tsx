@@ -9,6 +9,7 @@ import AppContext from '../context/AppContext';
 import {HomeStyle} from '../styles/HomeStyle';
 import {ButtonStyle} from '../styles/ButtonStyle';
 import Dpad from '../components/Dpad';
+import Voice from '../components/Voice';
 
 const Home = () => {
   const {connected, writeMessage} = useContext(AppContext) as any;
@@ -21,6 +22,7 @@ const Home = () => {
       <Dpad />
       <View style={HomeStyle.rightMenu}>
         <View style={HomeStyle.bleBtn}>
+          <Voice />
           <Pressable
             onPress={() => setShowBle(true)}
             style={ButtonStyle.button}>

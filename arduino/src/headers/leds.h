@@ -2,6 +2,8 @@
 
 void setupLeds();
 
+void earLeds(String);
+
 void setColor(String);
 
 void rainbow();

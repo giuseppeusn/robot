@@ -6,6 +6,8 @@
 #define LED_TYPE    WS2812B
 #define COLOR_ORDER GRB
 
+#define EAR_LEDS 23
+
 CRGB leds[NUM_LEDS];
 
 void setupLeds() {
@@ -18,6 +20,38 @@ void setupLeds() {
   }
 
   FastLED.show();
+
+  pinMode(EAR_LEDS, OUTPUT);
+}
+
+void blinkEarUnderstood() {
+  digitalWrite(EAR_LEDS, LOW);
+  delay(100);
+  digitalWrite(EAR_LEDS, HIGH);
+  delay(100);
+  digitalWrite(EAR_LEDS, LOW);
+  delay(100);
+  digitalWrite(EAR_LEDS, HIGH);
+  delay(100);
+  digitalWrite(EAR_LEDS, LOW);
+}
+
+void blinkEarNotUnderstood() {
+  digitalWrite(EAR_LEDS, LOW);
+  delay(800);
+  digitalWrite(EAR_LEDS, HIGH);
+  delay(800);
+  digitalWrite(EAR_LEDS, LOW);
+}
+
+void earLeds(String data) {
+  if (data == "listening") {
+    digitalWrite(EAR_LEDS, HIGH);
+  } else if (data == "notUnderstood") {
+    blinkEarNotUnderstood();
+  } else {
+    blinkEarUnderstood();
+  }
 }
 
 void setColor(String data) {

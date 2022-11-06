@@ -28,6 +28,8 @@ void loop() {
       rainbow();
     } else if (type == 3) {
       wheelControll(message);
+    } else if (type == 4) {
+      earLeds(message);
     }
   }
 }
